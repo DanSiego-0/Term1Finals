@@ -3,6 +3,43 @@
 #include <time.h>
 #include <string.h>
 
+//User 
+struct UserProfile
+{
+    char userName [50]; 
+    double userBal; 
+    char userInventory[7][2] = { 
+        {"Scaless Blackfish","0"},
+        {"Gold","0"},
+        {"Majestic water","0"},
+        {"Wondrous vinegar","0"},
+        {"Mariana Snailfish","0"},
+        {"Mudskippers","0"},
+        {"Hillstream Loaches","0"}
+    };
+};
+
+//Game Functions 
+void Shop(double money, char itemName[50], double itemPrice){
+    if (money >= itemPrice) 
+        printf("Success Transaction!");
+        money-=itemPrice;
+    else {
+        printf("Not sufficient money!");
+    };
+    
+}
+void Inventory(userInv[6][2]) {
+    printf("|| Inventory ||");
+    for(int x = 0;x<=6;x++){
+        for(int y = 0; y<=2; y++) {
+            printf("%s",userInv[x][y]," ");
+        }
+    }
+
+    
+}
+
 //Game Mechanics
 void ViewNavigator() {
     printf("||WELCOME TO SECRET POTIONS OF THE GEFFEN WITCHES||\n");
@@ -48,7 +85,6 @@ void Navigator(int choice){
     }
 }
 
-
 //Game resources 
 struct Chakra
 {
@@ -58,27 +94,24 @@ struct Chakra
     
 };
 
-//User 
-struct UserProfile
-{
-    char userName [50]; 
-    double userBal; 
-};
 
-//Game Functions 
-double Shop(double money, char itemName[50], double itemPrice){
-    if (money >= itemPrice) 
-        money-=itemPrice;
-    return money;
-}
 
 int main() {
-    ViewNavigator();
-    int choice; 
-    while(choice !=6) {
-        scanf("%d",&choice);
-        Navigator(choice);
-    }
+      char userInventory[][7][100] = { 
+        {"Scaless Blackfish","0"},
+        {"Gold","0"},
+        {"Majestic water","0"},
+        {"Wondrous vinegar","0"},
+        {"Mariana Snailfish","0"},
+        {"Mudskippers","0"},
+        {"Hillstream Loaches","0"}
+    };
 
+    for (int x = 0;x<=6;x++){
+        for (int y = 0; y <= 1; y++) {
+            printf("%s",userInventory[x][y]);
+        }
+    }
+   
     return 0; 
 }
