@@ -6,40 +6,52 @@
 //User 
 struct UserProfile
 {
-    char userName [50]; 
+    int itemAmount[7];
+    char *userInventory[7];
     double userBal; 
-    char userInventory[7][2] = { 
-        {"Scaless Blackfish","0"},
-        {"Gold","0"},
-        {"Majestic water","0"},
-        {"Wondrous vinegar","0"},
-        {"Mariana Snailfish","0"},
-        {"Mudskippers","0"},
-        {"Hillstream Loaches","0"}
-    };
+    char userName[50]; 
 };
 
 //Game Functions 
-void Shop(double money, char itemName[50], double itemPrice){
-    if (money >= itemPrice) 
-        printf("Success Transaction!");
-        money-=itemPrice;
-    else {
-        printf("Not sufficient money!");
-    };
-    
-}
-void Inventory(userInv[6][2]) {
-    printf("|| Inventory ||");
-    for(int x = 0;x<=6;x++){
-        for(int y = 0; y<=2; y++) {
-            printf("%s",userInv[x][y]," ");
-        }
+void InitPlayer(int itemamnt[],char *backpckarr[]) {
+    for (int x = 0; x<7;x++) {
+        itemamnt[x] = 0;
+        switch (x)
+        {
+        case 0:
+            backpckarr[0] = "Scaless Blackfish  ";
+            break;
+        case 1:
+            backpckarr[1] = "Gold               ";
+            break;
+        case 2:
+            backpckarr[2] = "Majestic water     ";
+            break;
+        case 3:
+            backpckarr[3] = "Wondrous Vinegar   ";
+            break;
+        case 4:
+            backpckarr[4] = "Mariana Snailfish  ";
+            break;
+        case 5: 
+            backpckarr[5] = "Mudskippers        ";
+            break;
+        case 6:
+            backpckarr[6] = "Hillstream Loaches ";
+            break;
+        default:
+            break;
+        } 
     }
-
-    
 }
-
+void ShowInventory(char *backpackarray[],int itemamount[]){
+    printf("||Item||                      ||Amount||\n");
+     for (int x = 0; x<7;x++) {
+      printf("%s", backpackarray[x]);
+      printf("               ");
+      printf("%d\n", itemamount[x]);
+    }
+}
 //Game Mechanics
 void ViewNavigator() {
     printf("||WELCOME TO SECRET POTIONS OF THE GEFFEN WITCHES||\n");
@@ -97,21 +109,16 @@ struct Chakra
 
 
 int main() {
-      char userInventory[][7][100] = { 
-        {"Scaless Blackfish","0"},
-        {"Gold","0"},
-        {"Majestic water","0"},
-        {"Wondrous vinegar","0"},
-        {"Mariana Snailfish","0"},
-        {"Mudskippers","0"},
-        {"Hillstream Loaches","0"}
-    };
+     
+    struct UserProfile player1;
+    InitPlayer(player1.itemAmount,player1.userInventory);
+    player1.userBal = 0.0;
+    ShowInventory(player1.userInventory,player1.itemAmount);
 
-    for (int x = 0;x<=6;x++){
-        for (int y = 0; y <= 1; y++) {
-            printf("%s",userInventory[x][y]);
-        }
-    }
+
+
+   
+
    
     return 0; 
 }
