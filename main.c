@@ -79,7 +79,16 @@ void ViewLocations() {
     printf("[5] Back\n");
 }
 void Taal(){
-    printf("Hello Taal");
+    printf("Hello Taal\n");
+}
+void Galathea(){
+    printf("Hello galathea\n");
+}
+void Dagupan(){
+    printf("Hello dagupan\n");
+}
+void Mindanao() {
+    printf("Hello Mindanao\n");
 }
 
 void MainMenu(char *backpackarray[],int itemamount[]) {
@@ -96,21 +105,25 @@ void MainMenu(char *backpackarray[],int itemamount[]) {
             scanf("%d",&choice); 
             if (choice == 1) {
                 int y = 0;
+                Taal();
                 printf("Nothing much here </3\n");
                 printf("[1] Return\n");
                 scanf("%d",&y);
             }else if (choice == 2){
                 int c = 0;
+                Galathea();
                 printf("Nothing much here </3\n");
                 printf("[1] Return\n");
                 scanf("%d",&c);
             }else if (choice == 3) {
                 int y = 0;
+                Dagupan();
                 printf("Nothing much here </3\n");
                 printf("[1] Return");
                 scanf("%d",&y);
             }else if (choice == 4) {
                 int y = 0;
+                Mindanao();
                 printf("Nothing much here </3\n");
                 printf("[1] Return\n");
                 scanf("%d",&y);
@@ -141,13 +154,6 @@ void MainMenu(char *backpackarray[],int itemamount[]) {
 
 
 //Game resources 
-struct Chakra
-{
-    char materials[4][20];
-    char location[4][20];
-    double price[1000]; 
-    
-};
 
 
 
