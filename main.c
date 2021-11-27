@@ -10,10 +10,10 @@ struct UserProfile
     int itemAmount[7];
     char *userInventory[7];
     double userBal; 
-    char userName[50]; 
+    char *userName; 
 };
 
-//Game Functions 
+//Player Functions 
 void InitPlayer(int itemamnt[],char *backpckarr[]) {
     for (int x = 0; x<7;x++) {
         itemamnt[x] = 0;
@@ -49,12 +49,18 @@ void ShowInventory(char *backpackarray[],int itemamount[]){
     printf("||Item||                ||Amount||\n");
      for (int x = 0; x<7;x++) {
       printf("%s", backpackarray[x]);
-      printf("               ");
+      printf("          ");
       printf("%d\n", itemamount[x]);
     }
 }
+void PlayerStats(struct UserProfile player1) {
+    printf("------------------------------------\n");
+    printf("Username: %s\n",player1.userName);
+    printf("Ymir: %.2f\n", player1.userBal);
+    printf("------------------------------------\n");
+}
 
-//Game Mechanics
+//Game Functions
 void ViewNavigator() {
     printf("||WELCOME TO SECRET POTIONS OF THE GEFFEN WITCHES||\n");
     printf("[1] Travel options\n");
@@ -66,35 +72,113 @@ void ViewNavigator() {
     printf("---------------------------------------------------------\n");
 }
 void ViewLocations() {
-    printf("[1] Geffen\n                  "); 
-    printf("[2] Holgrehenn Store\n        ");
-    printf("[3] Taal Lake\n               "); 
-    printf("[4] Galathea Deep\n           ");
-    printf("[5] Dagupan Mongrove Forests\n"); 
-    printf("[6] Mindanao Current\n        ");
-    printf("[7] back\n                    ");
+    printf("[1] Taal Lake\n"); 
+    printf("[2] Galathea Deep\n");
+    printf("[3] Dagupan Mongrove Forests\n");
+    printf("[4] Mindanao Current\n");
+    printf("[5] Back\n");
 }
-void Navigator(int choice,char *backpackarr[], int itemamount[]){
-    while (choice != 0){
+void Taal(){
+    printf("Hello Taal");
+}
+
+void MainMenu(char *backpackarray[],int itemamount[]) {
+    bool exitGame = false; 
+    int x;
+    while(!exitGame) {
+        x = 0;
         ViewNavigator();
-        if (choice == 1){
-            int x = 0; 
-            printf("||Travel Options\n  ");
+        printf("Where to?: "); 
+        scanf("%d",&x);
+        if (x == 1) {
+            int choice; 
             ViewLocations();
-            scanf("%d",&x); 
-            while(x!=7) {
-                if (x == 1) printf("Hello Geffen");
-                else if (x == 2) printf("Hello holgrehenn Store"); 
-                else if (x == 3) printf("Hello taal");
-                else if (x == 4) printf("Hello Galathea");
-                else if (x == 5) printf("Hello dagupan");
-                else if (x == 6) printf("Hello Mindanao"); 
-                else if (x == 7) ViewNavigator();
-                else printf("Not in the choices :(");
-            }
+            scanf("%d",&choice); 
+            if (choice == 1) {
+                int y = 0;
+                printf("Nothing much here </3\n");
+                printf("[1] Return\n");
+                scanf("%d",&y);
+            }else if (choice == 2){
+                int c = 0;
+                printf("Nothing much here </3\n");
+                printf("[1] Return\n");
+                scanf("%d",&c);
+            }else if (choice == 3) {
+                int y = 0;
+                printf("Nothing much here </3\n");
+                printf("[1] Return");
+                scanf("%d",&y);
+            }else if (choice == 4) {
+                int y = 0;
+                printf("Nothing much here </3\n");
+                printf("[1] Return\n");
+                scanf("%d",&y);
+            }else if (choice == 5) {
+                char y; 
+                printf("Are you sure you wanna leave? [y/n]\n");
+                scanf(" %c",&y);
+                if (y == 'n') ;
+                else if (y == 'y'){
+                    printf("Goodbye! See you again next time! :)\n ");
+                }
+            }else printf("Not in the choices!\n");
         }
+        else if (x == 2) {
+            ShowInventory(backpackarray,itemamount);
+            char g;
+            printf("Return? [y/n]\n");
+            scanf(" %c",&g);
+            if (g == 'n'){
+                printf("Goodbye! See you again next time! :) \n");
+                exitGame = true;
+            }else if (g == 'y') {
+
+            }else printf("Choice not found!\n");
+        }    
     }
-    // switch (choice)
+}
+
+
+//Game resources 
+struct Chakra
+{
+    char materials[4][20];
+    char location[4][20];
+    double price[1000]; 
+    
+};
+
+
+
+int main() {
+     
+    //Player init 
+    struct UserProfile player1;
+    InitPlayer(player1.itemAmount,player1.userInventory);
+    player1.userBal = 20.0;
+    strcpy(player1.userName,"Brendan");
+
+    PlayerStats(player1);
+    MainMenu(player1.userInventory,player1.itemAmount);
+    
+
+
+
+   
+
+   
+    return 0; 
+}
+
+
+
+
+
+
+
+
+// switch (choice)
     // {
     // case 1:
     //     printf("||Travel Options||\n ");
@@ -123,37 +207,3 @@ void Navigator(int choice,char *backpackarr[], int itemamount[]){
     // default:
     //     break;
     // }
-}
-
-//Game resources 
-struct Chakra
-{
-    char materials[4][20];
-    char location[4][20];
-    double price[1000]; 
-    
-};
-
-
-
-int main() {
-     
-    //Player init 
-    struct UserProfile player1;
-    InitPlayer(player1.itemAmount,player1.userInventory);
-    player1.userBal = 0.0;
-
-    int choice = 0; 
-    ViewNavigator();
-    scanf("%d",&choice);
-    Navigator(choice,player1.userInventory,player1.itemAmount);
-
-    
-
-
-
-   
-
-   
-    return 0; 
-}
