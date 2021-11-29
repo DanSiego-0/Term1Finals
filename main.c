@@ -1,4 +1,4 @@
-#include <stdio.h>
+ #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
@@ -7,8 +7,8 @@
 //User 
 struct UserProfile
 {
-    int itemAmount[7];
-    char *userInventory[7];
+    int itemAmount[11];
+    char *userInventory[11];
     double userBal; 
     char *userName; 
 };
@@ -16,7 +16,7 @@ struct UserProfile
 //Player Functions 
 void InitPlayer(int itemamnt[],char *backpckarr[]) {
 	int x;
-    for (x = 0; x<7;x++) {
+    for (x = 0; x<11;x++) {
         itemamnt[x] = 1;
         switch (x)
         {
@@ -41,6 +41,18 @@ void InitPlayer(int itemamnt[],char *backpckarr[]) {
         case 6:
             backpckarr[6] = "Hillstream Loaches ";
             break;
+        case 7: 
+        	backpckarr[7] = "Fire Chakra        ";
+        	break;
+        case 8: 
+        	backpckarr[8] = "Water Chakra       ";
+        	break;
+        case 9: 
+        	backpckarr[9] = "Earth Chakra       ";
+        	break;
+        case 10: 
+        	backpckarr[10] = "Air Chakra         ";
+        	break;
         default:
             break;
         } 
@@ -50,7 +62,7 @@ void ShowInventory(char *backpackarray[],int itemamount[]){
 	int x;
 	printf("          ||Inventory||       \n");
     printf("||Item||                ||Amount||\n");
-     for (x = 0; x<7;x++) {
+     for (x = 0; x<11;x++) {
       printf("%s", backpackarray[x]);
       printf("          ");
       printf("%d\n", itemamount[x]);
@@ -69,8 +81,7 @@ void ViewNavigator() {
     printf("[1] Travel options\n");
     printf("[2] Inventory     \n");
     printf("[3] Crafting Area \n");
-    printf("[4] Fishing Area  \n");
-    printf("[5] Shop          \n"); 
+    printf("[4] Shop          \n"); 
     printf("[6] Exit game     \n");
     printf("---------------------------------------------------------\n");
 }
@@ -82,7 +93,7 @@ void ViewLocations() {
     printf("[4] Mindanao Current\n");
 }
 void Taal(){
-    printf("Hello Taal\n");
+    printf("||Fishing Area||\n");
 }
 void Galathea(){
     printf("Hello galathea\n");
@@ -102,7 +113,7 @@ void Craft(char *backpackarray[],int itemamount[]) {
     printf("[1] Craft Fire Chakra\n");
     printf("--------------------------------------------------------------------------------\n");
     printf("Requirements: Water Chakra: \n");
-	printf("1x Mariana Snailfish\n1x Gold\n1x Majestic Water\n1x Wondrous Vinegar\n");
+ 	printf("1x Mariana Snailfish\n1x Gold\n1x Majestic Water\n1x Wondrous Vinegar\n");
 	printf("[2] Craft Water Chakra\n");
     printf("--------------------------------------------------------------------------------\n");
 	printf("Requirements: Earth Chakra: \n");
@@ -114,30 +125,53 @@ void Craft(char *backpackarray[],int itemamount[]) {
 	printf("[4] Craft Fire Chakra\n");
 	printf("--------------------------------------------------------------------------------\n");
 }
-int CraftFire(int itemamount[]){
-		itemamount[0]--; //Scaleless Blackfish
-		itemamount[1]--; //Gold
-		itemamount[2]--; //Majestic water
-		itemamount[3]--; //Wondrous Vinegar
-//		printf("%d%d%d%d",itemamount[0],itemamount[1],itemamount[2],itemamount[3]);
+void CraftFire(int itemamount[]){ 
+		if (itemamount[0] >= 1 && itemamount[1] >=1 && itemamount[2] >=1 && itemamount[3] >= 1){
+			itemamount[0]--; //Scaleless Blackfish
+			itemamount[1]--; //Gold
+			itemamount[2]--; //Majestic water
+			itemamount[3]--; //Wondrous Vinegar
+			itemamount[7]++; //Fire Chakra
+			printf("Success!\n");
+		}else {
+			printf("Not enough resources!\n");
+		}
 }
-int CraftWater(int itemamount[]){
-		itemamount[4]--; // Mariana Snailfish
-		itemamount[1]--; //Gold
-		itemamount[2]--; //Majestic water
-		itemamount[3]--; //Wondrous vinegar 
+void CraftWater(int itemamount[]){
+		if (itemamount[4] >= 1 && itemamount[1] >=1 && itemamount[2] >=1 && itemamount[3] >= 1){
+			itemamount[4]--; //Mariana Snailfish
+			itemamount[1]--; //Gold
+			itemamount[2]--; //Majestic water
+			itemamount[3]--; //Wondrous Vinegar
+			itemamount[8]++; //Water Chakra
+			printf("Success!\n");
+		}else {
+			printf("Not enough resources!\n");
+		}
 }
-int CraftEarth(int itemamount[]){
-		itemamount[5]--; // Mudskippers
-		itemamount[1]--; // Gold
-		itemamount[2]--; // Majestic Water
-		itemamount[3]--; // Wondrous vinegar
+void CraftEarth(int itemamount[]){
+		if (itemamount[5] >= 1 && itemamount[1] >=1 && itemamount[2] >=1 && itemamount[3] >= 1){
+			itemamount[5]--; //Mudskippers
+			itemamount[1]--; //Gold
+			itemamount[2]--; //Majestic water
+			itemamount[3]--; //Wondrous Vinegar
+			itemamount[9]++; //Earth Chakra
+			printf("Success!\n");
+		}else {
+			printf("Not enough resources!\n");
+		}
 }
-int CraftAir(int itemamount[]){
-		itemamount[6]--; // Hillstream Loaches
-		itemamount[1]--; // Gold 
-		itemamount[2]--; // Majestic water 
-		itemamount[3]--; // Wondrous vinegar
+void CraftAir(int itemamount[]){
+		if (itemamount[6] >= 1 && itemamount[1] >=1 && itemamount[2] >=1 && itemamount[3] >= 1){
+			itemamount[6]--; //Scaleless Blackfish
+			itemamount[1]--; //Gold
+			itemamount[2]--; //Majestic water
+			itemamount[3]--; //Wondrous Vinegar
+			itemamount[10]++; //Air Chakra
+			printf("Success!\n");
+		}else {
+			printf("Not enough resources!\n");
+		}
 }
 
 void MainMenu(char *backpackarray[],int itemamount[]) {
@@ -169,7 +203,8 @@ void MainMenu(char *backpackarray[],int itemamount[]) {
 			}
 		}else if(choice == 3){
 			int c;
-			while(c!=5){
+			while(c!=5) {
+				char enterPressed;
 				Craft(backpackarray,itemamount);
 				printf("       <----[5] Return---->       \n");
 				scanf("%d",&c);
@@ -183,8 +218,12 @@ void MainMenu(char *backpackarray[],int itemamount[]) {
 					CraftAir(itemamount);
 				}
 			}
+		}else if (choice == 4) {
+			
+			
 		}else if (choice == 6) {
 			exit = true; 
+			
 		}else {
 			printf("Not a choice!\n");
 		}
