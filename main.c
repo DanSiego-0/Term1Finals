@@ -1,4 +1,4 @@
- #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
@@ -92,16 +92,17 @@ void ViewLocations() {
     printf("[3] Dagupan Mongrove Forests\n");
     printf("[4] Mindanao Current\n");
 }
-void Taal(){
-    printf("||Fishing Area||\n");
+int Taal(){
+    printf("||Welcome to Taal||\n");
+    printf("<-----Press 1 to start fishing----->\n");
 }
-void Galathea(){
+int Galathea(){
     printf("Hello galathea\n");
 }
-void Dagupan(){
+int Dagupan(){
     printf("Hello dagupan\n");
 }
-void Mindanao(){
+int Mindanao(){
     printf("Hello Mindanao\n");
 }
 void Craft(char *backpackarray[],int itemamount[]) {
@@ -183,6 +184,11 @@ void MainMenu(char *backpackarray[],int itemamount[]) {
    		if (choice == 1) {
    			int c;
    			ViewLocations();
+   			scanf("%d",&c);
+   			if (c == 1) Taal(); 
+   			else if (c == 2) Galathea();
+   			else if (c == 3) Dagupan();
+   			else if (c == 4) Mindanao();
 			printf("<----[5] Return---->\n");
 			scanf("%d",&c);
 			while(c!=5){
@@ -237,6 +243,13 @@ void MainMenu(char *backpackarray[],int itemamount[]) {
 
 
 int main() {
+	struct UserProfile
+{
+    int itemAmount[11];
+    char *userInventory[11];
+    double userBal; 
+    char *userName; 
+};
      
     //Player init 
     struct UserProfile player1;
