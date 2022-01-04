@@ -7,8 +7,8 @@
 //User 
 struct UserProfile
 {
-    int itemAmount[11];
-    char *userInventory[11];
+    int itemAmount[12];
+    char *userInventory[12];
     double userBal; 
     char *userName; 
 };
@@ -16,8 +16,8 @@ struct UserProfile
 //Player Functions 
 void InitPlayer(int itemamnt[],char *backpckarr[]) {
 	int x;
-    for (x = 0; x<11;x++) {
-        itemamnt[x] = 1;
+    for (x = 0; x<12;x++) {
+        itemamnt[x] = 0;
         switch (x)
         {
         case 0:
@@ -53,6 +53,9 @@ void InitPlayer(int itemamnt[],char *backpckarr[]) {
         case 10: 
         	backpckarr[10] = "Air Chakra         ";
         	break;
+        case 11:
+        	backpckarr[11] = "Tilapia            ";
+        	break;
         default:
             break;
         } 
@@ -62,7 +65,7 @@ void ShowInventory(char *backpackarray[],int itemamount[]){
 	int x;
 	printf("          ||Inventory||       \n");
     printf("||Item||                ||Amount||\n");
-     for (x = 0; x<11;x++) {
+     for (x = 0; x<12;x++) {
       printf("%s", backpackarray[x]);
       printf("          ");
       printf("%d\n", itemamount[x]);
@@ -92,9 +95,60 @@ void ViewLocations() {
     printf("[3] Dagupan Mongrove Forests\n");
     printf("[4] Mindanao Current\n");
 }
-int Taal(){
-    printf("||Welcome to Taal||\n");
-    printf("<-----Press 1 to start fishing----->\n");
+void Taal(double ymir, char *backpackarray[],int itemamount[]) {
+    printf("Welcome to Taal Lake!\n");
+    printf("Current Balance: ");
+    printf("%f",ymir);
+    printf("\n[1] Fish\n[2] Sell");
+    int choice;
+    scanf("%d",&choice);
+    if (choice == 1) {
+        int startFish;
+        printf("<--- Press 1 to start fishing --->\n");
+        scanf("%d",&startFish);
+        while (startFish != 1) {
+            printf("<--- Press 1 to start fishing --->\n");
+            scanf("%d",&startFish);
+        }
+        if (startFish == 1) {
+            char baitChoice;
+            float CHANCE_WITHOUT_SPECIALBAIT = 0.1, CHANCE_WITH_SPECIALBAIT = 0.3;
+            bool isBaitUsed = true;
+            printf("Special Bait/s: ");
+            printf("%d",backpackarray[12]);
+            if (backpackarray[12] > 0) printf("\nUse special bait? y | n \n");
+            scanf("%c",&baitChoice);
+            while (baitChoice != 'y' || baitChoice != 'n') {
+                if (baitChoice == 'y') {
+                    isBaitUsed = true;
+                    *backpackarray -= 1;
+                }
+                else if (baitChoice == 'n') {
+                    printf("alright.");
+                    isBaitUsed = false;
+                }else printf("Not in the choices!");
+                scanf("%c",&baitChoice);
+            }
+            if (isBaitUsed) {
+                if ((float)((rand()%100)) <= CHANCE_WITH_SPECIALBAIT * 100) {
+                    printf("Congratulations! You have caught a rare Scaless BlackFish!!");
+                    *backpackarray[0] += 1;
+                }else{
+                    printf("You have caught: Tilapia!");
+                    *backpackarray[12] +=1;
+                }
+            }else if (!isBaitUsed) {
+                if ((float)((rand()%100)) <= CHANCE_WITHOUT_SPECIALBAIT * 100) {
+                    printf("Congratulations! You have caught a rare Scaless BlackFish!!");
+                    *backpackarray[0] += 1;
+                }else{
+                    printf("You have caught: Tilapia!");
+                    *backpackarray[12] +=1;
+                }
+            }
+            
+        }
+    }
 }
 int Galathea(){
     printf("Hello galathea\n");
@@ -174,8 +228,11 @@ void CraftAir(int itemamount[]){
 			printf("Not enough resources!\n");
 		}
 }
+void Shop(double ymir, double inventory) {
+	printf("");
+}
 
-void MainMenu(char *backpackarray[],int itemamount[]) {
+void MainMenu(char *backpackarray[],int itemamount[], double money) {
    int choice; 
    bool exit = false;
    while (!exit) {
@@ -185,7 +242,7 @@ void MainMenu(char *backpackarray[],int itemamount[]) {
    			int c;
    			ViewLocations();
    			scanf("%d",&c);
-   			if (c == 1) Taal(); 
+   			if (c == 1) Taal(money,backpackarray,itemamount);
    			else if (c == 2) Galathea();
    			else if (c == 3) Dagupan();
    			else if (c == 4) Mindanao();
@@ -243,20 +300,13 @@ void MainMenu(char *backpackarray[],int itemamount[]) {
 
 
 int main() {
-	struct UserProfile
-{
-    int itemAmount[11];
-    char *userInventory[11];
-    double userBal; 
-    char *userName; 
-};
      
     //Player init 
     struct UserProfile player1;
     InitPlayer(player1.itemAmount,player1.userInventory);
     player1.userBal = 20.0; 
 //	ShowInventory(player1.userInventory,player1.itemAmount);
-	MainMenu(player1.userInventory,player1.itemAmount);
+	MainMenu(player1.userInventory,player1.itemAmount,player1.userBal);
 
 
 
