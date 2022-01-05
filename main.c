@@ -106,76 +106,7 @@ void ViewLocations() {
     printf("[4] Mindanao Current\n");
 }
 
-void Galathea(double ymir, char *backpackarray[],int itemamount[]) {
-	//(float)((rand()%100)
-	float CHANCE_WITHOUT_SPECIALBAIT = 0.1, CHANCE_WITH_SPECIALBAIT = 0.3;
-	bool isMagicalBaitUsed;
-	char bait;
-    printf("Welcome to Taal Lake!\n");
-    printf("Current Balance: ");
-    printf("%.2f",ymir);
-    printf("\n[1] Fish\n[2] Sell \n");
-    int choice;
-    scanf("%d",&choice);
-    if (choice == 1) {
-    	printf("<----Start Fishing----> \n");
-    	printf("Magical Bait: ");
-    	printf("%d\n",itemamount[15]);
-    	if (itemamount[15] > 0) {
-    		printf("Use Magical Bait? [Y or N]\n");
-    		scanf(" %c",&bait);
-    		if (bait == 'Y' || bait == 'y') {
-				isMagicalBaitUsed = true; 
-				itemamount[15]--;
-			}
-    		else if (bait == 'N' || bait == 'n') isMagicalBaitUsed = false; 
-    		else {
-			printf("Not in the choices!\n");
-			isMagicalBaitUsed = false;
-			}
-		}else isMagicalBaitUsed = false;
-		// Fishing 
-		if (isMagicalBaitUsed) {
-			if ((float)((rand()%100)) <= CHANCE_WITH_SPECIALBAIT * 100) {
-				printf("Congratulations! You have caught a rare Mariana Snailfish!!\n");
-				itemamount[4]++;
-			}else {
-				printf("Congratulations! You have caught Sardines! \n");
-				itemamount[12]++;
-			}
-		}else if (!isMagicalBaitUsed) {
-			if ((float)((rand()%100)) <= CHANCE_WITHOUT_SPECIALBAIT * 100) {
-				printf("Congratulations! You have caught a rare Mariana Snailfish!!\n");
-				itemamount[4]++;
-			}else {
-				printf("Congratulations! You have caught Sardines! \n");
-				itemamount[12]++;
-			}
-		}
-	}else if (choice == 2) {
-		int chooser;
-		if (itemamount[4] > 0 || itemamount[12] > 0) {
-			printf("<----Items To Sell---->\n");
-			if (itemamount[4] > 0) {
-				printf("[1] Mariana Snailfish: ");
-				printf("%d\n",itemamount[4]);
-			}
-			if (itemamount[12] > 0) {
-				printf("[2] Sardines: ");
-				printf("%d\n",itemamount[12]);
-			}
-			scanf("%d",&chooser);
-			if (chooser == 1) {
-				itemamount[4]--;
-				printf("Sold!\n");
-			}
-			else if (chooser == 2) {
-				itemamount[12]--;
-				printf("Sold!\n");
-			}
-		}else printf("Nothing to sell.\n");
-}
-}
+
 void Dagupan(double ymir, char *backpackarray[],int itemamount[]) {
 	//(float)((rand()%100)
 	float CHANCE_WITHOUT_SPECIALBAIT = 0.1, CHANCE_WITH_SPECIALBAIT = 0.3;
@@ -395,6 +326,7 @@ int main() {
     //Player init   
     struct UserProfile player1;
     InitPlayer(player1.itemAmount,player1.userInventory);
+    float CHANCE_WITHOUT_SPECIALBAIT = 0.1, CHANCE_WITH_SPECIALBAIT = 0.3;
 	int choice; 
     bool exit = false;
     while (!exit) {
@@ -405,7 +337,6 @@ int main() {
    			ViewLocations();
    			scanf("%d",&c);
    			if (c == 1) {
-   				float CHANCE_WITHOUT_SPECIALBAIT = 0.1, CHANCE_WITH_SPECIALBAIT = 0.3;
 				bool isMagicalBaitUsed;
 				char bait;
     			printf("Welcome to Taal Lake!\n");
@@ -475,10 +406,219 @@ int main() {
 				}else printf("Nothing to sell.\n");
 		
 	}
-			   };
-//   			else if (c == 2) Galathea(&player1.userBal,player1.userInventory,player1.itemAmount);
-//   			else if (c == 3) Dagupan(&player1.userBal,player1.userInventory,player1.itemAmount);
-//   			else if (c == 4) Mindanao(&player1.userBal,player1.userInventory,player1.itemAmount);
+			   }else if (c == 2){
+				bool isMagicalBaitUsed;
+				char bait;
+    			printf("Welcome to Galathea Deep!\n");
+    			printf("Current Balance: ");
+    			printf("%.2lf",player1.userBal);
+    			printf("\n[1] Fish\n[2] Sell \n");
+    			int choice;
+    			scanf("%d",&choice);
+    				if (choice == 1) {
+    					printf("<----Start Fishing----> \n");
+    					printf("Magical Bait: ");
+    					printf("%d\n",player1.itemAmount[15]);
+    					if (player1.itemAmount[15] > 0) {
+    						printf("Use Magical Bait? [Y or N]\n");
+    						scanf(" %c",&bait);
+    							if (bait == 'Y' || bait == 'y') {
+									isMagicalBaitUsed = true; 
+									player1.itemAmount[15]--;
+								}
+    							else if (bait == 'N' || bait == 'n') isMagicalBaitUsed = false; 
+    							else {
+									printf("Not in the choices!\n");
+									isMagicalBaitUsed = false;
+								}
+						}else isMagicalBaitUsed = false;
+					// Fishing 
+					if (isMagicalBaitUsed) {
+						if ((float)((rand()%100)) <= CHANCE_WITH_SPECIALBAIT * 100) {
+							printf("Congratulations! You have caught a rare Mariana Snailfish!!\n");
+							player1.itemAmount[4]++;
+						}else {
+							printf("Congratulations! You have caught Sardines! \n");
+							player1.itemAmount[12]++;
+						}	
+					}else if (!isMagicalBaitUsed) {
+						if ((float)((rand()%100)) <= CHANCE_WITHOUT_SPECIALBAIT * 100) {
+						printf("Congratulations! You have caught a rare Mariana Snailfish!!\n");
+						player1.itemAmount[4]++;
+						}else {
+							printf("Congratulations! You have caught Sardines! \n");
+							player1.itemAmount[12]++;
+						}
+						}
+				}else if (choice == 2) {
+					int chooser;
+					if (player1.itemAmount[4] > 0 || player1.itemAmount[12] > 0) {
+						printf("<----Items To Sell---->\n");
+							if (player1.itemAmount[4] > 0) {
+								printf("[1] Mariana Snailfish: ");
+								printf("%d\n",player1.itemAmount[4]);
+							}
+							if (player1.itemAmount[12] > 0) {
+								printf("[2] Sardines: ");
+								printf("%d\n",player1.itemAmount[12]);
+							}
+					scanf("%d",&chooser);
+						if (chooser == 1) {
+							player1.itemAmount[4]--;
+							Sell(&player1.userBal,1000.0);
+							printf("Sold!\n");
+						}
+						else if (chooser == 2) {
+							player1.itemAmount[12]--;
+							Sell(&player1.userBal,35.0);
+							printf("Sold!\n");
+						}
+				}else printf("Nothing to sell.\n");
+		
+	}
+			   }else if (c == 3) {
+				bool isMagicalBaitUsed;
+				char bait;
+    			printf("Welcome to Dagupan Mangrove Forests!\n");
+    			printf("Current Balance: ");
+    			printf("%.2lf",player1.userBal);
+    			printf("\n[1] Fish\n[2] Sell \n");
+    			int choice;
+    			scanf("%d",&choice);
+    				if (choice == 1) {
+    					printf("<----Start Fishing----> \n");
+    					printf("Magical Bait: ");
+    					printf("%d\n",player1.itemAmount[15]);
+    					if (player1.itemAmount[15] > 0) {
+    						printf("Use Magical Bait? [Y or N]\n");
+    						scanf(" %c",&bait);
+    							if (bait == 'Y' || bait == 'y') {
+									isMagicalBaitUsed = true; 
+									player1.itemAmount[15]--;
+								}
+    							else if (bait == 'N' || bait == 'n') isMagicalBaitUsed = false; 
+    							else {
+									printf("Not in the choices!\n");
+									isMagicalBaitUsed = false;
+								}
+						}else isMagicalBaitUsed = false;
+					// Fishing 
+					if (isMagicalBaitUsed) {
+						if ((float)((rand()%100)) <= CHANCE_WITH_SPECIALBAIT * 100) {
+							printf("Congratulations! You have caught a Mudskipper!!\n");
+							player1.itemAmount[5]++;
+						}else {
+							printf("Congratulations! You have caught Bangus! \n");
+							player1.itemAmount[13]++;
+						}	
+					}else if (!isMagicalBaitUsed) {
+						if ((float)((rand()%100)) <= CHANCE_WITHOUT_SPECIALBAIT * 100) {
+						printf("Congratulations! You have caught a rare Mudskipper!!\n");
+						player1.itemAmount[5]++;
+						}else {
+							printf("Congratulations! You have caught Bangus! \n");
+							player1.itemAmount[13]++;
+						}
+						}
+				}else if (choice == 2) {
+					int chooser;
+					if (player1.itemAmount[5] > 0 || player1.itemAmount[13] > 0) {
+						printf("<----Items To Sell---->\n");
+							if (player1.itemAmount[5] > 0) {
+								printf("[1] Scaless Blackfish: ");
+								printf("%d\n",player1.itemAmount[5]);
+							}
+							if (player1.itemAmount[13] > 0) {
+								printf("[2] Tilapia: ");
+								printf("%d\n",player1.itemAmount[13]);
+							}
+					scanf("%d",&chooser);
+						if (chooser == 1) {
+							player1.itemAmount[5]--;
+							Sell(&player1.userBal,1000.0);
+							printf("Sold!\n");
+						}
+						else if (chooser == 2) {
+							player1.itemAmount[13]--;
+							Sell(&player1.userBal,35.0);
+							printf("Sold!\n");
+						}
+				}else printf("Nothing to sell.\n");
+		
+	}
+			   }else if (c == 4) {
+				bool isMagicalBaitUsed;
+				char bait;
+    			printf("Welcome to Mindanao Current!\n");
+    			printf("Current Balance: ");
+    			printf("%.2lf",player1.userBal);
+    			printf("\n[1] Fish\n[2] Sell \n");
+    			int choice;
+    			scanf("%d",&choice);
+    				if (choice == 1) {
+    					printf("<----Start Fishing----> \n");
+    					printf("Magical Bait: ");
+    					printf("%d\n",player1.itemAmount[15]);
+    					if (player1.itemAmount[15] > 0) {
+    						printf("Use Magical Bait? [Y or N]\n");
+    						scanf(" %c",&bait);
+    							if (bait == 'Y' || bait == 'y') {
+									isMagicalBaitUsed = true; 
+									player1.itemAmount[15]--;
+								}
+    							else if (bait == 'N' || bait == 'n') isMagicalBaitUsed = false; 
+    							else {
+									printf("Not in the choices!\n");
+									isMagicalBaitUsed = false;
+								}
+						}else isMagicalBaitUsed = false;
+					// Fishing 
+					if (isMagicalBaitUsed) {
+						if ((float)((rand()%100)) <= CHANCE_WITH_SPECIALBAIT * 100) {
+							printf("Congratulations! You have caught a rare Hillstream Loach!!\n");
+							player1.itemAmount[6]++;
+						}else {
+							printf("Congratulations! You have caught Tuna! \n");
+							player1.itemAmount[14]++;
+						}	
+					}else if (!isMagicalBaitUsed) {
+						if ((float)((rand()%100)) <= CHANCE_WITHOUT_SPECIALBAIT * 100) {
+						printf("Congratulations! You have caught a rare Hillstream Loach!!\n");
+						player1.itemAmount[6]++;
+						}else {
+							printf("Congratulations! You have caught Tuna! \n");
+							player1.itemAmount[14]++;
+						}
+						}
+				}else if (choice == 2) {
+					int chooser;
+					if (player1.itemAmount[6] > 0 || player1.itemAmount[14] > 0) {
+						printf("<----Items To Sell---->\n");
+							if (player1.itemAmount[6] > 0) {
+								printf("[1] Hillstream Loaches: ");
+								printf("%d\n",player1.itemAmount[6]);
+							}
+							if (player1.itemAmount[14] > 0) {
+								printf("[2] Tuna: ");
+								printf("%d\n",player1.itemAmount[14]);
+							}
+					scanf("%d",&chooser);
+						if (chooser == 1) {
+							player1.itemAmount[6]--;
+							Sell(&player1.userBal,1000.0);
+							printf("Sold!\n");
+						}
+						else if (chooser == 2) {
+							player1.itemAmount[14]--;
+							Sell(&player1.userBal,35.0);
+							printf("Sold!\n");
+						}
+				}else printf("Nothing to sell.\n");
+		
+	}
+}
+			   
+			   
 			printf("<----[5] Return---->\n");
 			scanf("%d",&c);
 			while(c!=5){
