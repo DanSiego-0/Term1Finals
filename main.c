@@ -20,13 +20,22 @@ struct UserProfile
     double userBal; 
 };
 
+/* This function checks if the game is over
+ 	Precondition: parameter is an array 
+ 	@param itemamnt[] is an int array that is the user's inventory quantity count
+ 	@return a boolean value;
+*/
+bool isGameFinished(int itemamnt[]) {
+	return itemamnt[16] > 0 ? true:false;
+}
+
 //Player Functions 
 
 /* Initialize player's inventory
  	Precondition: parameters are both arrays
  	@param itemamnt[] is an int array that is the user's inventory quantity count
  	@param *backpckarr[] is a string array that is the user's inventory label
- 	@return initialize from 0 - 15 all the item quantity
+ 	@return None
 */
 void InitPlayer(int itemamnt[],char *backpckarr[]) {
 
@@ -98,15 +107,9 @@ void InitPlayer(int itemamnt[],char *backpckarr[]) {
  	Precondition: parameters are both arrays
  	@param itemamnt[] is an int array that is the user's inventory quantity count
  	@param *backpckarr[] is a string array that is the user's inventory label
- 	@return show the user's inventory
+ 	@return None
 */
 void ShowInventory(char *backpackarray[],int itemamount[]){
-/* Show the player's inventory
- 	Precondition: parameters are both arrays
- 	@param itemamnt[] is an int array that is the user's inventory quantity count
- 	@param *backpckarr[] is a string array that is the user's inventory label
- 	@return show the user's inventory
-*/
 	int x;
 	printf("          ||Inventory||       \n");
     printf("||Item||                ||Amount||\n");
@@ -121,16 +124,17 @@ void ShowInventory(char *backpackarray[],int itemamount[]){
  	Precondition: *ymir is a pointer, cost is double and non-negative
  	@param *ymir is a pointer that updates the value of the user's ymir
  	@param cost is the amount to be added
- 	@return update user ymir
+ 	@return None
 */
 void Sell(double *ymir,double cost){
 	*ymir += cost;
 }
+
 /* Initialize player's inventory
  	Precondition: *ymir is a pointer, cost is double and non-negative
  	@param *ymir is a pointer that updates the value of the user's ymir
  	@param cost is the amount to be deducted
- 	@return update user ymir
+ 	@return None
 */
 void Buy (double *ymir, double cost) {
 	if (*ymir < cost) printf("Not enough Ymir\n");
@@ -141,7 +145,7 @@ void Buy (double *ymir, double cost) {
 /* Show the player's ymir
  	Precondition: ymir must be the user's ymir variable
  	@param ymir is the user's balance
- 	@return show the user's ymir
+ 	@return None
 */
 void ViewStatus(double ymir) {
 	printf("======================================================================\n");
@@ -154,9 +158,8 @@ void ViewStatus(double ymir) {
 /* Show the game's main menu
  	Precondition: ymir must be the user's ymir balance variable
  	@param ymir is the user's balance
- 	@return shows the user the main menu
+ 	@return None
 */
-
 void ViewNavigator(double ymir) {
     printf("||WELCOME TO SECRET POTIONS OF THE GEFFEN WITCHES||\n");
    	ViewStatus(ymir);
@@ -170,7 +173,7 @@ void ViewNavigator(double ymir) {
 
 /* Show the game the travel options
  	Precondition: None
- 	@return show the user's inventory
+ 	@return None
 */
 void ViewLocations() {
 	printf("||Locations||\n");
@@ -185,7 +188,7 @@ void ViewLocations() {
  	Precondition: parameters are both arrays
  	@param itemamnt[] is an int array that is the user's inventory quantity count
  	@param *backpckarr[] is a string array that is the user's inventory label
- 	@return prompts the user to make a choice
+ 	@return None
 */
 void Craft(char *backpackarray[],int itemamount[]) {
 	printf("                                  <----Loots---->                                    \n");
@@ -221,10 +224,10 @@ void Craft(char *backpackarray[],int itemamount[]) {
 	printf("<----[6] Back---->\n");
 }
 
-/* Show the player's inventory
+/* This function updates the value of the user's inventory once crafted
  	Precondition: parameter is an array 
  	@param itemamnt[] is an int array that is the user's inventory quantity count
- 	@return update the value of the user's inventory once crafted
+ 	@return None
 */
 void CraftFire(int itemamount[]){ 
 	int fire_Choice;
@@ -250,7 +253,11 @@ void CraftFire(int itemamount[]){
 		}
 }
 
-
+/* This function updates the value of the user's inventory once crafted
+ 	Precondition: parameter is an array 
+ 	@param itemamnt[] is an int array that is the user's inventory quantity count
+ 	@return None
+*/
 void CraftWater(int itemamount[]){
 	int water_Choice;
 		if (itemamount[4] >= 1 && itemamount[1] >=1 && itemamount[2] >=1 && itemamount[3] >= 1){
@@ -276,10 +283,10 @@ void CraftWater(int itemamount[]){
 		}
 }
 
-/* Show the player's inventory
+/* This function updates the value of the user's inventory once crafted
  	Precondition: parameter is an array 
  	@param itemamnt[] is an int array that is the user's inventory quantity count
- 	@return update the value of the user's inventory once crafted
+ 	@return None
 */
 void CraftEarth(int itemamount[]){
 	int earth_Choice;
@@ -309,7 +316,7 @@ void CraftEarth(int itemamount[]){
 /* Show the player's inventory
  	Precondition: parameter is an array 
  	@param itemamnt[] is an int array that is the user's inventory quantity count
- 	@return update the value of the user's inventory once crafted
+ 	@return None
 */
 void CraftAir(int itemamount[]){
 	int air_Choice;
@@ -334,7 +341,13 @@ void CraftAir(int itemamount[]){
 		}else {
 			printf("Not enough resources!\n");
 		}
-}void CraftYmir(int itemamount[]){
+}
+/* This function updates the value of the user's inventory once crafted
+ 	Precondition: parameter is an array 
+ 	@param itemamnt[] is an int array that is the user's inventory quantity count
+ 	@return None
+*/
+void CraftYmir(int itemamount[]){
 		if (itemamount[7] >= 1 && itemamount[8] >=1 && itemamount[9] >=1 && itemamount[10] >= 1){
 			itemamount[7]--; //Scaleless Blackfish
 			itemamount[8]--; //Gold
@@ -350,7 +363,7 @@ void CraftAir(int itemamount[]){
 /* Shows the user the options in buy under shop
  	Precondition: None
  	@param ymir is the user's balance
- 	@return void
+ 	@return None
 */
 void ViewBuy(double ymir) {
 	ViewStatus(ymir);
@@ -363,7 +376,7 @@ void ViewBuy(double ymir) {
  	Precondition: None
  	@param itemamnt[] is an int array that is the user's inventory quantity count
  	@param *backpckarr[] is a string array that is the user's inventory label
- 	@return void
+ 	@return None
 */
 void ViewSell( char *backpackarray[],int itemamount[]) {
 	if (itemamount[1] > 0 || itemamount[2] > 0 || itemamount[3] > 0 || itemamount[15] > 0) {
@@ -393,11 +406,11 @@ void ViewSell( char *backpackarray[],int itemamount[]) {
 	}
 }
 
-/* Show options in the target place
+/* This function updates the value of the user's inventory once crafted
  	Precondition: parameter is an array 
  	@param itemamnt[] is an int array that is the user's inventory quantity count
  	@param ymir is the user's balance
- 	@return update the value of the user's inventory once crafted
+ 	@return None
 */
 void ViewTaal(double ymir,int itemamount[]) {
 		printf("Welcome to Taal Lake\n");
@@ -405,10 +418,10 @@ void ViewTaal(double ymir,int itemamount[]) {
    		printf("\n[1] Fish\n[2] Sell \n[3] Back\n");
 }
 
-/* This function is the algorithm for fishing that uses randomization to compute the chances of catching fishes
+/* This function is the algorithm for fishing that uses randomization to compute the chances of catching fishes and updates user inventory once done.
  	Precondition: parameter is an array 
  	@param itemamnt[] is an int array that is the user's inventory quantity count
- 	@return update the value of the user's inventory once crafted
+ 	@return None
 */
 void Taal_Fishing( int itemamount[]) {
 	//Rand Settings
@@ -455,13 +468,11 @@ void Taal_Fishing( int itemamount[]) {
 	}
 }
 
-//Galathea
-
-/* Show options in the target place
+/* This function updates the value of the user's inventory once crafted
  	Precondition: parameter is an array 
  	@param itemamnt[] is an int array that is the user's inventory quantity count
  	@param ymir is the user's balance
- 	@return update the value of the user's inventory once crafted
+ 	@return None
 */
 void ViewGalathea(double ymir,int itemamount[]) {
 		printf("Welcome to Galathea!\n");
@@ -472,7 +483,7 @@ void ViewGalathea(double ymir,int itemamount[]) {
 /* This function is the algorithm for fishing that uses randomization to compute the chances of catching fishes
  	Precondition: parameter is an array 
  	@param itemamnt[] is an int array that is the user's inventory quantity count
- 	@return update the value of the user's inventory once crafted
+ 	@return None
 */
 void Galathea_Fishing( int itemamount[]) {
 	//Rand Settings
@@ -519,12 +530,11 @@ void Galathea_Fishing( int itemamount[]) {
 	}
 }
 
-//Dagupan 
-/* Show options in the target place
+/* This function updates the value of the user's inventory once crafted
  	Precondition: parameter is an array 
  	@param itemamnt[] is an int array that is the user's inventory quantity count
  	@param ymir is the user's balance
- 	@return update the value of the user's inventory once crafted
+ 	@return None
 */
 void ViewDagupan(double ymir,int itemamount[]) {
 		printf("Welcome to Dagupan!\n");
@@ -535,7 +545,7 @@ void ViewDagupan(double ymir,int itemamount[]) {
 /* This function is the algorithm for fishing that uses randomization to compute the chances of catching fishes
  	Precondition: parameter is an array 
  	@param itemamnt[] is an int array that is the user's inventory quantity count
- 	@return update the value of the user's inventory once crafted
+ 	@return None
 */
 void Dagupan_Fishing( int itemamount[]) {
 	//Rand Settings
@@ -582,13 +592,11 @@ void Dagupan_Fishing( int itemamount[]) {
 	}
 }
 
-//Mindanao Current 
-
-/* Show options in the target place
+/* This function updates the value of the user's inventory once crafted
  	Precondition: parameter is an array 
  	@param itemamnt[] is an int array that is the user's inventory quantity count
  	@param ymir is the user's balance
- 	@return update the value of the user's inventory once crafted
+ 	@return None
 */
 void ViewMindanao(double ymir,int itemamount[]) {
 		printf("Welcome to Dagupan!\n");
@@ -662,20 +670,19 @@ int main() {
     InitPlayer(player1.itemAmount,player1.userInventory);
     float CHANCE_WITHOUT_SPECIALBAIT = 0.1, CHANCE_WITH_SPECIALBAIT = 0.3;
     int mainChoice;
-    bool isGameFinished = false; 
     ViewNavigator(player1.userBal);
-   	while (mainChoice != 6 || isGameFinished != true) { // Main Lobby
-   	  if (player1.itemAmount[16] >=1) {
-		   	printf("You have finished the game!\n You may continue playing ");
-		   	isGameFinished = true;
-		   }
+   	while (mainChoice != 6) { // Main Lobby
+   		if (player1.itemAmount[16] > 0) {
+   			printf("You have finished the game!\n");
+   			printf("<---- End Game ---->\n");
+   			mainChoice = 6;
+	   	}else {
    		scanf("%d",&mainChoice);
    		if (mainChoice == 1) { // Travel Options
    			//Variables
    			int travelChoice;
    			ViewLocations();
    			travelChoice = 0; // Resetting to 0 for the user to be able to go back and forth Travel Options
-   			
    			//Select Place Algorithm
    			while (travelChoice != 5) {
    				scanf("%d",&travelChoice);
@@ -887,6 +894,8 @@ int main() {
 					   }
 				ViewLocations(); // Return to travel locations
 					
+				}else if (travelChoice == 5){
+					ViewNavigator(player1.userBal);
 				}else printf("Not in the choices\n");
 			   }
    			
@@ -895,9 +904,10 @@ int main() {
 				ShowInventory(player1.userInventory,player1.itemAmount);
 				inventory_Choice = 0; // Reset
 				while(inventory_Choice!=1){
-					printf("[1] Return ");
+					printf("[1] Return \n");
 					scanf("%d",&inventory_Choice);
 				}
+				ViewNavigator(player1.userBal);
 		   		
 		   }else if (mainChoice == 3) { // Crafting 
 		   //   Variables
@@ -924,6 +934,7 @@ int main() {
 						CraftYmir(player1.itemAmount);
 						Craft(player1.userInventory,player1.itemAmount);
 					}else if (craft_Choice == 6) {
+						ViewNavigator(player1.userBal);
 					}else printf("Not in the choices\n");
 				   }
 		   }else if (mainChoice == 4 ) { // Shop
@@ -981,15 +992,20 @@ int main() {
 							   }
 							   HolgrehennStoreView(); 
 					   		
-					   }
+					   }else if (store_Choice == 3) {
+					   	ViewNavigator(player1.userBal);
+					   }else printf("[3] Return\n");
 				   }
 		   		
 		   		
-		   }
-		   ViewNavigator(player1.userBal);
+		   }else if (mainChoice == 6) {
+		   	
+		   }else ViewNavigator(player1.userBal);
+	}
+		   
 	   }
 
-   
+
     return 0; 
 }
 
