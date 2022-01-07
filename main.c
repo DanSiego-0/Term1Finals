@@ -15,8 +15,8 @@ struct UserProfile
 //Player Functions 
 void InitPlayer(int itemamnt[],char *backpckarr[]) {
 	int x;
-    for (x = 0; x<17;x++) {
-        itemamnt[x] = 0;
+    for (x = 0; x<16;x++) {
+        itemamnt[x] = 1;
         switch (x)
         {
         case 0:
@@ -74,6 +74,9 @@ void InitPlayer(int itemamnt[],char *backpckarr[]) {
             break;
         } 
     }
+    	backpckarr[16] = "Ymir's Avatar Potion ";
+    	itemamnt[16] = 0;
+    
 }
 void ShowInventory(char *backpackarray[],int itemamount[]){
 	int x;
@@ -153,49 +156,96 @@ void Craft(char *backpackarray[],int itemamount[]) {
 	printf("<----[6] Back---->\n");
 }
 void CraftFire(int itemamount[]){ 
+	int fire_Choice;
 		if (itemamount[0] >= 1 && itemamount[1] >=1 && itemamount[2] >=1 && itemamount[3] >= 1){
-			itemamount[0]--; //Scaleless Blackfish
-			itemamount[1]--; //Gold
-			itemamount[2]--; //Majestic water
-			itemamount[3]--; //Wondrous Vinegar
-			itemamount[7]++; //Fire Chakra
-			printf("Success!\n");
+			printf("Are you sure you want to craft?\n");
+			printf("[1] Proceed\n[2] Back\n");
+			while (fire_Choice != 2) {
+				scanf("%d",&fire_Choice);
+				if (fire_Choice == 1) {
+					itemamount[0]--; //Scaleless Blackfish
+					itemamount[1]--; //Gold
+					itemamount[2]--; //Majestic water
+					itemamount[3]--; //Wondrous Vinegar
+					itemamount[7]++; //Fire Chakra
+					printf("Success!\n");
+					fire_Choice = 2;
+				}else if(fire_Choice == 2) {
+					
+				}else printf("Not in the choices!\n");
+			}
 		}else {
 			printf("Not enough resources!\n");
 		}
 }
 void CraftWater(int itemamount[]){
+	int water_Choice;
 		if (itemamount[4] >= 1 && itemamount[1] >=1 && itemamount[2] >=1 && itemamount[3] >= 1){
-			itemamount[4]--; //Mariana Snailfish
-			itemamount[1]--; //Gold
-			itemamount[2]--; //Majestic water
-			itemamount[3]--; //Wondrous Vinegar
-			itemamount[8]++; //Water Chakra
-			printf("Success!\n");
+			printf("Are you sure you want to craft?\n");
+			printf("[1] Proceed\n[2] Back\n");
+			while (water_Choice != 2) {
+				scanf("%d",&water_Choice);
+				if (water_Choice == 1) {
+					itemamount[4]--; //Mariana Snailfish
+					itemamount[1]--; //Gold
+					itemamount[2]--; //Majestic water
+					itemamount[3]--; //Wondrous Vinegar
+					itemamount[8]++; //Water Chakra
+					printf("Success!\n");
+					water_Choice = 2;
+				}else if (water_Choice == 2) {
+					
+				}else printf("Not in the choices!\n");
+			}
+			
 		}else {
 			printf("Not enough resources!\n");
 		}
 }
 void CraftEarth(int itemamount[]){
+	int earth_Choice;
+	
 		if (itemamount[5] >= 1 && itemamount[1] >=1 && itemamount[2] >=1 && itemamount[3] >= 1){
-			itemamount[5]--; //Mudskippers
-			itemamount[1]--; //Gold
-			itemamount[2]--; //Majestic water
-			itemamount[3]--; //Wondrous Vinegar
-			itemamount[9]++; //Earth Chakra
-			printf("Success!\n");
+			printf("Are you sure you want to craft?\n");
+			printf("[1] Proceed\n[2] Back\n");
+			while (earth_Choice != 2) {
+				scanf("%d",&earth_Choice);
+				if (earth_Choice == 1) {
+					itemamount[5]--; //Mudskippers
+					itemamount[1]--; //Gold
+					itemamount[2]--; //Majestic water
+					itemamount[3]--; //Wondrous Vinegar
+					itemamount[9]++; //Earth Chakra
+					printf("Success!\n");
+					earth_Choice = 2;
+				}else if (earth_Choice == 2) {
+					
+				}else printf("Not in the choices!\n");
+			}
 		}else {
 			printf("Not enough resources!\n");
 		}
 }
 void CraftAir(int itemamount[]){
+	int air_Choice;
+	
 		if (itemamount[6] >= 1 && itemamount[1] >=1 && itemamount[2] >=1 && itemamount[3] >= 1){
-			itemamount[6]--; //Scaleless Blackfish
-			itemamount[1]--; //Gold
-			itemamount[2]--; //Majestic water
-			itemamount[3]--; //Wondrous Vinegar
-			itemamount[10]++; //Air Chakra
-			printf("Success!\n");
+			printf("Are you sure you want to craft?\n");
+			printf("[1] Proceed\n[2] Back\n");
+			while (air_Choice != 2) {
+				scanf("%d",&air_Choice);
+				if (air_Choice == 1) {
+					itemamount[6]--; //Scaleless Blackfish
+					itemamount[1]--; //Gold
+					itemamount[2]--; //Majestic water
+					itemamount[3]--; //Wondrous Vinegar
+					itemamount[10]++; //Air Chakra
+					printf("Success!\n");
+					air_Choice = 2;
+				}else if (air_Choice == 2) {
+					
+				}else printf("Not in the choices!\n");	
+			}
 		}else {
 			printf("Not enough resources!\n");
 		}
@@ -462,8 +512,13 @@ int main() {
     InitPlayer(player1.itemAmount,player1.userInventory);
     float CHANCE_WITHOUT_SPECIALBAIT = 0.1, CHANCE_WITH_SPECIALBAIT = 0.3;
     int mainChoice;
+    bool isGameFinished = false; 
     ViewNavigator(player1.userBal);
-   	while (mainChoice != 6) { // Main Lobby
+   	while (mainChoice != 6 || isGameFinished != true) { // Main Lobby
+   	  if (player1.itemAmount[16] >=1) {
+		   	printf("You have finished the game!\n You may continue playing ");
+		   	isGameFinished = true;
+		   }
    		scanf("%d",&mainChoice);
    		if (mainChoice == 1) { // Travel Options
    			//Variables
@@ -705,15 +760,21 @@ int main() {
 		   			scanf("%d",&craft_Choice);
 		   			if (craft_Choice == 1) {
 		   				CraftFire(player1.itemAmount);
+		   				Craft(player1.userInventory,player1.itemAmount);
 					}else if (craft_Choice == 2) {
 						CraftWater(player1.itemAmount);
+						Craft(player1.userInventory,player1.itemAmount);
 					}else if (craft_Choice == 3) {
 						CraftEarth(player1.itemAmount);
+						Craft(player1.userInventory,player1.itemAmount);
 					}else if (craft_Choice == 4) {
 						CraftAir(player1.itemAmount);
+						Craft(player1.userInventory,player1.itemAmount);
 					}else if (craft_Choice == 5) {
 						CraftYmir(player1.itemAmount);
-					}else printf("Not in choices\n");
+						Craft(player1.userInventory,player1.itemAmount);
+					}else if (craft_Choice == 6) {
+					}else printf("Not in the choices\n");
 				   }
 		   }else if (mainChoice == 4 ) { // Shop
 		   	// Variable 
