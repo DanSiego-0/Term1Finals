@@ -20,15 +20,6 @@ struct UserProfile
     double userBal; 
 };
 
-/* This function checks if the game is over
- 	Precondition: parameter is an array 
- 	@param itemamnt[] is an int array that is the user's inventory quantity count
- 	@return a boolean value;
-*/
-bool isGameFinished(int itemamnt[]) {
-	return itemamnt[16] > 0 ? true:false;
-}
-
 //Player Functions 
 
 /* Initialize player's inventory
@@ -40,8 +31,8 @@ bool isGameFinished(int itemamnt[]) {
 void InitPlayer(int itemamnt[],char *backpckarr[]) {
 
 	int x;
-    for (x = 0; x<16;x++) {
-        itemamnt[x] = 1;
+    for (x = 0; x<17;x++) {
+        itemamnt[x] = 0;
         switch (x)
         {
         case 0:
@@ -99,8 +90,7 @@ void InitPlayer(int itemamnt[],char *backpckarr[]) {
             break;
         } 
     }
-    	backpckarr[16] = "Ymir's Avatar Potion ";
-    	itemamnt[16] = 0;
+    	
     
 }
 /* Show the player's inventory
