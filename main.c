@@ -1,3 +1,8 @@
+/******************************************************************
+This is to certify that this project is my own work, based on my personal efforts in studying and applying the concepts learned. I have constructed the functions and their respective algorithms
+and corresponding code by myself. The program was run, tested, and debugged by my own efforts. I further certify that I have not copied in part or whole or otherwise plagiarized the work of other students and/or persons.
+Brendan Nathaniel R. Castillo, DLSU ID# 12140961 
+******************************************************************/
 /*
  Description: This program is a commandline-based game in which will require the user to craft 4 potions to craft 1 potion to end the game.
  Programmed by: Brendan Nathaniel R. Castillo 02118B
@@ -998,4 +1003,3 @@ int main() {
 
     return 0; 
 }
-
