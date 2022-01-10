@@ -25,7 +25,6 @@ struct UserProfile
     double userBal; 
 };
 
-//Player Functions 
 
 /* Initialize player's inventory
  	Precondition: parameters are both arrays
@@ -125,6 +124,7 @@ void Sell(double *ymir,double cost){
 	*ymir += cost;
 }
 
+
 /* Initialize player's inventory
  	Precondition: *ymir is a pointer, cost is double and non-negative
  	@param *ymir is a pointer that updates the value of the user's ymir
@@ -134,6 +134,27 @@ void Sell(double *ymir,double cost){
 void Buy (double *ymir, double cost) {
 	if (*ymir < cost) printf("Not enough Ymir\n");
 	else *ymir -= cost;
+}
+
+/* Check if user can buy
+ 	Precondition: parameters are non-negative
+ 	@param ymir is the user's ymir balance
+ 	@param cost is the cost 
+ 	@return true or false
+*/
+
+bool BuyChecker(double ymir, double cost) {
+	return ymir > cost ? true:false;
+}
+
+/* Check if user can sell
+ 	Precondition: Parameters are non negative
+ 	@param ymir is the user's ymir balance
+ 	@param cost is the cost 
+ 	@return true or false
+*/
+bool SellChecker(int itemamount[],int x) {
+	return itemamount[x] > 0 ? true:false;
 }
 
 
@@ -212,7 +233,7 @@ void Craft(char *backpackarray[],int itemamount[]) {
 	printf("Water Chakra: ");
 	printf("%d\n",itemamount[8]);
 	printf("Earth Chakra: ");
-	printf("%d\n",itemamount[9]);
+	printf("%d\n",itemamount[9])
 	printf("Air Chakra: ");
 	printf("%d\n",itemamount[10]);
 	printf("[5] Craft Ymir's Avatar Potion\n");
@@ -398,7 +419,7 @@ void ViewSell( char *backpackarray[],int itemamount[]) {
 			
 		}
 		printf("[5] Cancel\n");
-	}
+	}else printf("Nothing to sell.\n[5] Return\n");
 }
 
 /* This function updates the value of the user's inventory once crafted
@@ -950,17 +971,25 @@ int main() {
 		   				while (buy_Choice != 5) {
 		   					scanf("%d",&buy_Choice);
 		   					if (buy_Choice == 1) {
-		   						Buy(&player1.userBal,750.0);
-		   						player1.itemAmount[1]++;
+		   						if (BuyChecker(player1.userBal,750.0)){
+									   player1.itemAmount[1]++;
+									   Buy(&player1.userBal,750.0);
+								   }
 							}else if (buy_Choice == 2) {
-								Buy(&player1.userBal,100.0);
-								player1.itemAmount[2]++;
+								if (BuyChecker(player1.userBal,100.0)){
+									player1.itemAmount[2]++;
+									Buy(&player1.userBal,100.0);
+								}
 							}else if (buy_Choice == 3) {
-								Buy(&player1.userBal,150.0);
-								player1.itemAmount[3]++;
+								if (BuyChecker(player1.userBal,150.0)){
+									player1.itemAmount[3]++;
+									Buy(&player1.userBal,150.0);
+								}
 							}else if (buy_Choice == 4) {
-								Buy(&player1.userBal,300.0);
-								player1.itemAmount[15]++;
+								if (BuyChecker(player1.userBal,300.0)){
+									player1.itemAmount[15]++;
+									Buy(&player1.userBal,300.0);
+								}5
 							}
 						}
 						HolgrehennStoreView(); 
@@ -972,18 +1001,28 @@ int main() {
 					   		while (sell_Choice != 5) {
 					   			scanf("%d",&sell_Choice);
 					   			if (sell_Choice == 1) {
-					   				Sell(&player1.userBal,750.0);
-					   				player1.itemAmount[1]--;
+									if (SellChecker(player1.itemAmount,1)) {
+										player1.itemAmount[1]--;
+										Sell(&player1.userBal,750.0);
+									}
 								}else if (sell_Choice == 2) {
-									Sell(&player1.userBal,100.0);
-									player1.itemAmount[2]--;
+									if (SellChecker(player1.itemAmount,2)) {
+										player1.itemAmount[2]--;
+										Sell(&player1.userBal,100.0);
+									}
 								}else if (sell_Choice == 3) {
-									Sell(&player1.userBal,150.0);
-									player1.itemAmount[3]--;
+									if (SellChecker(player1.itemAmount,3)) {
+										player1.itemAmount[3]--;
+										Sell(&player1.userBal,150.0);
+									}
 								}else if (sell_Choice == 4) {
-									Sell(&player1.userBal,300.0);
-									player1.itemAmount[15]--;
-								}
+									if (SellChecker(player1.itemAmount,15)) {
+										player1.itemAmount[15]--;
+										Sell(&player1.userBal,300.0);
+									}
+								}else if (sell_Choice == 5) {
+									
+								}else printf("Not in the choices\n");
 							   }
 							   HolgrehennStoreView(); 
 					   		
