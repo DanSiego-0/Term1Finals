@@ -385,7 +385,7 @@ void ViewBuy(double ymir) {
 	ViewStatus(ymir);
 	printf("=======================================\n");
 	printf("Items to buy: \n");
-	printf("[1] Gold ---- 750 Ymir\n[2] Majestic Water ---- 100 Ymir\n[3] Wondrous Vinegar ---- 150\n[4] Magical Bait ---- 300 Ymir\n[5] Cancel\n");
+	printf("[1] Gold ---- 750 Ymir\n[2] Majestic Water ---- 100 Ymir\n[3] Wondrous Vinegar ---- 150\n[4] Magical Bait ---- 300 Ymir\n[5] Return\n");
 }
 
 /* Shows the user the options in sell under shop
@@ -974,21 +974,25 @@ int main() {
 		   						if (BuyChecker(player1.userBal,750.0)){
 									   player1.itemAmount[1]++;
 									   Buy(&player1.userBal,750.0);
+									   printf("Transaction Successful!\n");
 								   }
 							}else if (buy_Choice == 2) {
 								if (BuyChecker(player1.userBal,100.0)){
 									player1.itemAmount[2]++;
 									Buy(&player1.userBal,100.0);
+									printf("Transaction Successful!\n");
 								}
 							}else if (buy_Choice == 3) {
 								if (BuyChecker(player1.userBal,150.0)){
 									player1.itemAmount[3]++;
 									Buy(&player1.userBal,150.0);
+									printf("Transaction Successful!\n");
 								}
 							}else if (buy_Choice == 4) {
 								if (BuyChecker(player1.userBal,300.0)){
 									player1.itemAmount[15]++;
 									Buy(&player1.userBal,300.0);
+									printf("Transaction Successful!\n");
 								}
 							}
 						}
@@ -1004,21 +1008,25 @@ int main() {
 									if (SellChecker(player1.itemAmount,1)) {
 										player1.itemAmount[1]--;
 										Sell(&player1.userBal,750.0);
+										printf("Sold!\n");
 									}
 								}else if (sell_Choice == 2) {
 									if (SellChecker(player1.itemAmount,2)) {
 										player1.itemAmount[2]--;
 										Sell(&player1.userBal,100.0);
+										printf("Sold!\n");
 									}
 								}else if (sell_Choice == 3) {
 									if (SellChecker(player1.itemAmount,3)) {
 										player1.itemAmount[3]--;
 										Sell(&player1.userBal,150.0);
+										printf("Sold!\n");
 									}
 								}else if (sell_Choice == 4) {
 									if (SellChecker(player1.itemAmount,15)) {
 										player1.itemAmount[15]--;
 										Sell(&player1.userBal,300.0);
+										printf("Sold!\n");
 									}
 								}else if (sell_Choice == 5) {
 									
