@@ -233,7 +233,7 @@ void Craft(char *backpackarray[],int itemamount[]) {
 	printf("Water Chakra: ");
 	printf("%d\n",itemamount[8]);
 	printf("Earth Chakra: ");
-	printf("%d\n",itemamount[9])
+	printf("%d\n",itemamount[9]);
 	printf("Air Chakra: ");
 	printf("%d\n",itemamount[10]);
 	printf("[5] Craft Ymir's Avatar Potion\n");
@@ -989,7 +989,7 @@ int main() {
 								if (BuyChecker(player1.userBal,300.0)){
 									player1.itemAmount[15]++;
 									Buy(&player1.userBal,300.0);
-								}5
+								}
 							}
 						}
 						HolgrehennStoreView(); 
