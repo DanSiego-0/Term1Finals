@@ -6,9 +6,9 @@ Brendan Nathaniel R. Castillo, DLSU ID# 12140961
 /*
  Description: This program is a commandline-based game in which will require the user to craft 4 potions to craft 1 potion to end the game.
  Programmed by: Brendan Nathaniel R. Castillo 02118B
- Last modified: 1/8/2022
+ Last modified: 1/16/2022
  Version: 1.5
- [Acknowledgements: stackoverflow]
+ [Acknowledgements: stackoverflow and w3schools]
 */
 
 #include <stdio.h>
@@ -16,6 +16,12 @@ Brendan Nathaniel R. Castillo, DLSU ID# 12140961
 #include <time.h>
 #include <string.h>
 #include <stdbool.h>
+//Cross Platform enabler
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
 
 //User 
 struct UserProfile
@@ -25,6 +31,23 @@ struct UserProfile
     double userBal; 
 };
 
+/* Loading Screen
+ 	Precondition: None
+	 @param None
+ 	@return None
+*/
+
+void LoadingScreen() {
+	int bar; 
+	printf("Loading, please wait....\n");
+
+	for (bar = 0; bar <= 10; bar++) {
+		printf("[] ");
+		fflush(stdout);
+		sleep(1);
+	}
+	printf("\n");
+}
 
 /* Initialize player's inventory
  	Precondition: parameters are both arrays
@@ -40,55 +63,55 @@ void InitPlayer(int itemamnt[],char *backpckarr[]) {
         switch (x)
         {
         case 0:
-            backpckarr[0] = "Scaless Blackfish  ";
+            backpckarr[0] = "Scaless Blackfish   ";
             break;
         case 1:
-            backpckarr[1] = "Gold               ";
+            backpckarr[1] = "Gold                ";
             break;
         case 2:
-            backpckarr[2] = "Majestic water     ";
+            backpckarr[2] = "Majestic water      ";
             break;
         case 3:
-            backpckarr[3] = "Wondrous Vinegar   ";
+            backpckarr[3] = "Wondrous Vinegar    ";
             break;
         case 4:
-            backpckarr[4] = "Mariana Snailfish  ";
+            backpckarr[4] = "Mariana Snailfish   ";
             break;
         case 5: 
-            backpckarr[5] = "Mudskippers        ";
+            backpckarr[5] = "Mudskippers         ";
             break;
         case 6:
-            backpckarr[6] = "Hillstream Loaches ";
+            backpckarr[6] = "Hillstream Loaches  ";
             break;
         case 7: 
-        	backpckarr[7] = "Fire Chakra        ";
+        	backpckarr[7] = "Fire Chakra         ";
         	break;
         case 8: 
-        	backpckarr[8] = "Water Chakra       ";
+        	backpckarr[8] = "Water Chakra        ";
         	break;
         case 9: 
-        	backpckarr[9] = "Earth Chakra       ";
+        	backpckarr[9] = "Earth Chakra        ";
         	break;
         case 10: 
-        	backpckarr[10] = "Air Chakra         ";
+        	backpckarr[10] = "Air Chakra          ";
         	break;
         case 11:
-        	backpckarr[11] = "Tilapia            ";
+        	backpckarr[11] = "Tilapia             ";
         	break;
         case 12:
-        	backpckarr[12] = "Sardines           ";
+        	backpckarr[12] = "Sardines            ";
         	break;
         case 13: 
-        	backpckarr[13] = "Bangus             ";
+        	backpckarr[13] = "Bangus              ";
         	break;
         case 14: 
-        	backpckarr[14] = "Tuna               ";
+        	backpckarr[14] = "Tuna                ";
         	break;
         case 15:
-        	backpckarr[15] = "Magical Bait       ";
+        	backpckarr[15] = "Magical Bait        ";
         	break;
         case 16:
-        	backpckarr[16] = "Ymir's Avatar Potion ";
+        	backpckarr[16] = "Ymir's Avatar Potion";
         	break;
         default:
             break;
@@ -684,8 +707,8 @@ int main() {
     //Player init   
     struct UserProfile player1;
     InitPlayer(player1.itemAmount,player1.userInventory);
-    float CHANCE_WITHOUT_SPECIALBAIT = 0.1, CHANCE_WITH_SPECIALBAIT = 0.3;
     int mainChoice;
+	LoadingScreen();
     ViewNavigator(player1.userBal);
    	while (mainChoice != 6) { // Main Lobby
    		if (player1.itemAmount[16] > 0) {
@@ -975,25 +998,25 @@ int main() {
 									   player1.itemAmount[1]++;
 									   Buy(&player1.userBal,750.0);
 									   printf("Transaction Successful!\n");
-								   }
+								}else printf("Not enough Ymir\n");
 							}else if (buy_Choice == 2) {
 								if (BuyChecker(player1.userBal,100.0)){
 									player1.itemAmount[2]++;
 									Buy(&player1.userBal,100.0);
 									printf("Transaction Successful!\n");
-								}
+								}else printf("Not enough Ymir\n");
 							}else if (buy_Choice == 3) {
 								if (BuyChecker(player1.userBal,150.0)){
 									player1.itemAmount[3]++;
 									Buy(&player1.userBal,150.0);
 									printf("Transaction Successful!\n");
-								}
+								}else printf("Not enough Ymir\n");
 							}else if (buy_Choice == 4) {
 								if (BuyChecker(player1.userBal,300.0)){
 									player1.itemAmount[15]++;
 									Buy(&player1.userBal,300.0);
 									printf("Transaction Successful!\n");
-								}
+								}else printf("Not enough Ymir\n");
 							}
 						}
 						HolgrehennStoreView(); 
