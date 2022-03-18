@@ -46,7 +46,7 @@ void LoadingScreen() {
 		fflush(stdout);
 		sleep(1);
 	}
-	printf("\n");
+	printf("hello\n");
 }
 
 /* Initialize player's inventory
